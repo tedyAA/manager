@@ -1,6 +1,7 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 import MainPage from "@/views/MainPage";
+import Done from "@/views/Done";
 
 
 Vue.use(VueRouter)
@@ -11,6 +12,11 @@ const routes = [
     path: '/',
     name: 'MainPage',
     component: MainPage
+  },
+  {
+    path: '/ready',
+    name: 'Ready',
+    component: Done
   },
 
 

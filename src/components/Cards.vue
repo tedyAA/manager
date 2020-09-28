@@ -1,12 +1,13 @@
 <template>
   <div>
     <div class="row mt-5">
-    <div class="card xs12 sm6 md4 lg3 ml-3 mb-3 ml-5" style="width: 18rem;" v-for="task in $store.state.tasks" :key="task">
+    <div class="card xs12 sm6 md4 lg3 ml-3 mb-3 ml-5" style="width: 18rem;" v-for="(task,idx) in $store.state.tasks" :key="task">
       <div class="card-body">
-        <h5 class="card-title">{{ task.name }}</h5>
-        <p>{{task.content}}</p>
+        <h5 class="card-title">{{ task[idx].name }}</h5>
+        <p>{{task[idx].content}}</p>
         <button @click="deleteTask" class="btn btn-danger float-right ">Delete</button>
       </div>
+      <button @click="readyTask" class="btn btn-danger float-left ">Ready</button>
     </div>
       <add-card/>
     </div>
@@ -15,6 +16,7 @@
 
 <script>
 import AddCard from "@/components/AddCard";
+import { mapActions } from 'vuex'
 
 export default {
 
@@ -25,11 +27,16 @@ export default {
 
     }
   },
-
+  ...mapActions(['doneTasks']),
   methods: {
     deleteTask: function(task) {
-      this.$store.state.tasks.splice(this.$store.state.tasks.indexOf(task), 1)
+      this.$store.state.a.tasks.splice(this.$store.state.a.tasks.indexOf(task), 1)
     },
+    readyTask:function(task){
+      this.$store.dispatch('doneTasks',task)
+      this.$store.state.a.tasks.splice(this.$store.state.a.tasks.indexOf(task), 1)
+
+    }
   },
 }
 </script>

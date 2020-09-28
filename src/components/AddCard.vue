@@ -1,14 +1,14 @@
 <template>
   <div >
-      <div class="card xs12 sm6 md4 lg3 ml-3 mb-3 ml-5" style="width: 18rem;">
-        <div class="card-body">
-          <label class="text-info">Add Task Name:</label><br>
-          <h5 class="card-title"><input type="text" class="form-control" v-model="task.name"></h5>
-          <label class="text-info">Add Task Content:</label><br>
-          <h5 class="card-title"><input type="text" class="form-control" v-model="task.content"></h5>
-          <button class="btn btn-success " @click="addTask">Add</button>
-        </div>
+    <div class="card xs12 sm6 md4 lg3 ml-3 mb-3 ml-5" style="width: 18rem;">
+      <div class="card-body">
+        <label class="text-info">Add Task Name:</label><br>
+        <h5 class="card-title"><input type="text" class="form-control" v-model="task.name"></h5>
+        <label class="text-info">Add Task Content:</label><br>
+        <h5 class="card-title"><input type="text" class="form-control" v-model="task.content"></h5>
+        <button class="btn btn-success " @click="addTask">Add</button>
       </div>
+    </div>
   </div>
 </template>
 
@@ -17,20 +17,22 @@ import Vue from 'vue'
 import Vuelidate from 'vuelidate'
 Vue.use(Vuelidate)
 import { required, minLength } from 'vuelidate/lib/validators'
+import { mapActions } from 'vuex'
 
 export default {
-name: "AddCard",
+  name: "AddCard",
   data() {
     return {
-
-      task:[]
+      task:[],
+      note:{}
     }
   },
+  ...mapActions(['addTasks']),
   validations: {
-   task:{
-     required,
-     minLength: minLength(4)
-}
+    task:{
+      required,
+      minLength: minLength(4)
+    }
   },
   methods:{
     addTask: function (e) {
@@ -38,16 +40,15 @@ name: "AddCard",
       if(this.task.name=='' || this.task.content==''){
         return
       }else {
-        this.$store.state.tasks.push({
-          name: this.task.name,
-          content: this.task.content
-        })
+
+        console.log(this.task)
+        this.$store.dispatch('addTasks',this.task)
+        }
         this.task.name=''
         this.task.content=''
       }
     },
   }
-}
 </script>
 
 <style scoped>
@@ -60,13 +61,11 @@ name: "AddCard",
   border: none;
 }
 .btn-success{
-
   position: absolute;
   right:    0;
   bottom:   0;
   margin-bottom:2px;
   margin-right:2px;
   padding: 6px 12px;
-
 }
 </style>

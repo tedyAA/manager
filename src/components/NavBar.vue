@@ -9,6 +9,12 @@
     </button>
     <div class="collapse navbar-collapse" id="navbarNav">
       <ul class="navbar-nav">
+        <li class="nav-item active">
+          <a class="nav-link" @click="task">Tasks<span class="sr-only">(current)</span></a>
+        </li>
+        <li class="nav-item active">
+          <a class="nav-link" @click="ready">Ready<span class="sr-only">(current)</span></a>
+        </li>
       </ul>
     </div>
   </nav>
@@ -18,11 +24,11 @@
 export default {
 name: "NavBar",
   methods:{
-    dashboar() {
-      this.$router.push('/main')
+    task() {
+      this.$router.push('/')
     },
-    add() {
-      this.$router.push('/add')
+    ready() {
+      this.$router.push('/ready')
     },
   }
 }
