@@ -1,5 +1,6 @@
 <template>
   <div>
+    <h1 class="text-center mt-3">Ready tasks</h1>
     <div class="row mt-5">
       <div class="card xs12 sm6 md4 lg3 ml-3 mb-3 ml-5" style="width: 18rem;"
            v-for="task in this.$store.state.t.doneTasks" :key="task.name">
@@ -20,7 +21,12 @@ name: "DoneTasks"
 
 <style scoped>
 .card{
-
   background-image: url("../components/indexCard.jpg") ;
 }
+.card {
+  background-image: url("../components/indexCard.jpg");
+  width: 250px;
+  height: 200px;
+}
+
 </style>
